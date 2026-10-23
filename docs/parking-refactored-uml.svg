@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#555"/>
+    </marker>
+    <style>
+      .box { fill: white; stroke: #555; stroke-width: 1.5; }
+      .int { fill: #eaf3ff; stroke: #3975a8; stroke-width: 1.5; }
+      .title { font: bold 25px Arial; fill: #222; }
+      .name { font: bold 15px Arial; fill: #222; }
+      .text { font: 13px Arial; fill: #333; }
+      .line { stroke: #555; stroke-width: 1.4; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #777; stroke-width: 1.2; stroke-dasharray: 6 4; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1200" height="760" fill="#fafafa"/>
+  <text x="35" y="40" class="title">Parking refactored UML</text>
+
+  <g transform="translate(35 85)">
+    <rect width="285" height="230" class="box"/>
+    <text x="142" y="25" text-anchor="middle" class="name">ParkingService</text>
+    <line x1="0" y1="36" x2="285" y2="36" stroke="#555"/>
+    <text x="10" y="58" class="text">- tariffs: List&lt;VehicleTariff&gt;</text>
+    <text x="10" y="78" class="text">- formatter: ReceiptFormatter</text>
+    <text x="10" y="98" class="text">- log: ReceiptLog</text>
+    <line x1="0" y1="112" x2="285" y2="112" stroke="#555"/>
+    <text x="10" y="137" class="text">+ fee(vehicle, hours)</text>
+    <text x="10" y="157" class="text">+ checkout(vehicle, hours, method)</text>
+    <text x="10" y="177" class="text">+ cancel(..., RefundablePayment)</text>
+    <text x="10" y="197" class="text">+ dailyReport()</text>
+  </g>
+
+  <g transform="translate(420 75)">
+    <rect width="255" height="105" class="int"/>
+    <text x="127" y="23" text-anchor="middle" class="text">&lt;&lt;interface&gt;&gt;</text>
+    <text x="127" y="44" text-anchor="middle" class="name">VehicleTariff</text>
+    <line x1="0" y1="55" x2="255" y2="55" stroke="#3975a8"/>
+    <text x="10" y="77" class="text">+ supports(type)</text>
+    <text x="10" y="96" class="text">+ fee(vehicle, hours)</text>
+  </g>
+  <g transform="translate(420 215)"><rect width="120" height="58" class="box"/><text x="60" y="25" text-anchor="middle" class="name">CarTariff</text><text x="10" y="46" class="text">5 * hours</text></g>
+  <g transform="translate(555 215)"><rect width="140" height="58" class="box"/><text x="70" y="25" text-anchor="middle" class="name">MotorbikeTariff</text><text x="10" y="46" class="text">2 * hours</text></g>
+  <g transform="translate(420 295)"><rect width="120" height="58" class="box"/><text x="60" y="25" text-anchor="middle" class="name">TruckTariff</text><text x="10" y="46" class="text">20 + 10 * h</text></g>
+
+  <g transform="translate(810 75)">
+    <rect width="230" height="105" class="int"/>
+    <text x="115" y="23" text-anchor="middle" class="text">&lt;&lt;interface&gt;&gt;</text>
+    <text x="115" y="44" text-anchor="middle" class="name">PaymentMethod</text>
+    <line x1="0" y1="55" x2="230" y2="55" stroke="#3975a8"/>
+    <text x="10" y="77" class="text">+ name()</text>
+    <text x="10" y="96" class="text">+ pay(amount)</text>
+  </g>
+  <g transform="translate(810 215)"><rect width="140" height="58" class="box"/><text x="70" y="25" text-anchor="middle" class="name">CashPayment</text><text x="10" y="46" class="text">pay only</text></g>
+  <g transform="translate(970 215)"><rect width="140" height="58" class="box"/><text x="70" y="25" text-anchor="middle" class="name">CardPayment</text><text x="10" y="46" class="text">pay + refund</text></g>
+  <g transform="translate(970 75)"><rect width="195" height="105" class="int"/><text x="97" y="23" text-anchor="middle" class="text">&lt;&lt;interface&gt;&gt;</text><text x="97" y="44" text-anchor="middle" class="name">RefundablePayment</text><line x1="0" y1="55" x2="195" y2="55" stroke="#3975a8"/><text x="10" y="77" class="text">extends PaymentMethod</text><text x="10" y="96" class="text">+ refund(amount)</text></g>
+
+  <g transform="translate(35 470)"><rect width="285" height="105" class="box"/><text x="142" y="27" text-anchor="middle" class="name">ReceiptFormatter</text><line x1="0" y1="38" x2="285" y2="38" stroke="#555"/><text x="10" y="64" class="text">+ formatReceipt(receipt)</text><text x="10" y="87" class="text">+ formatDailyReport(...)</text></g>
+  <g transform="translate(420 470)"><rect width="255" height="105" class="int"/><text x="127" y="23" text-anchor="middle" class="text">&lt;&lt;interface&gt;&gt;</text><text x="127" y="44" text-anchor="middle" class="name">ReceiptLog</text><line x1="0" y1="55" x2="255" y2="55" stroke="#3975a8"/><text x="10" y="80" class="text">+ write(text)</text></g>
+  <g transform="translate(420 615)"><rect width="130" height="58" class="box"/><text x="65" y="25" text-anchor="middle" class="name">FileReceiptLog</text><text x="10" y="46" class="text">file</text></g>
+  <g transform="translate(565 615)"><rect width="145" height="58" class="box"/><text x="72" y="25" text-anchor="middle" class="name">MemoryReceiptLog</text><text x="10" y="46" class="text">test double</text></g>
+  <g transform="translate(810 470)"><rect width="230" height="105" class="box"/><text x="115" y="27" text-anchor="middle" class="name">Receipt</text><line x1="0" y1="38" x2="230" y2="38" stroke="#555"/><text x="10" y="62" class="text">vehicle, hours</text><text x="10" y="82" class="text">amount, payment</text></g>
+  <g transform="translate(810 615)"><rect width="230" height="82" class="box"/><text x="115" y="27" text-anchor="middle" class="name">Vehicle</text><line x1="0" y1="38" x2="230" y2="38" stroke="#555"/><text x="10" y="61" class="text">plate, type</text></g>
+
+  <path d="M320 150 L420 125" class="line"/><path d="M320 190 L810 125" class="line"/><path d="M320 275 L420 520" class="line"/>
+  <path d="M500 180 L480 215" class="dash"/><path d="M600 180 L625 215" class="dash"/><path d="M500 180 L480 295" class="dash"/>
+  <path d="M925 180 L880 215" class="dash"/><path d="M925 180 L1040 215" class="dash"/><path d="M1040 180 L1040 215" class="dash"/>
+  <path d="M550 575 L485 615" class="dash"/><path d="M600 575 L637 615" class="dash"/><path d="M1040 520 L925 615" class="line"/>
+  <text x="35" y="730" class="text">Dashed arrows mean implements or extends. Solid arrows mean uses or contains.</text>
+</svg>
